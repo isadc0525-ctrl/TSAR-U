@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Integrantes - {{ app_name }}{% endblock %}
+
+{% block content %}
+<div class="integrantes-container">
+    <div class="page-header">
+        <h1>Integrantes de {{ app_name }}</h1>
+        <p>Total: {{ integrantes|length }} rescatistas</p>
+    </div>
+
+    {% if integrantes %}
+    <div class="integrantes-grid">
+        {% for integrante in integrantes %}
+        <div class="integrante-card">
+            <div class="integrante-avatar">👤</div>
+            <div class="integrante-info">
+                <h3>{{ integrante.nombre_completo }}</h3>
+                <p class="role">{{ integrante.rol }}</p>
+                <p class="email">{{ integrante.email }}</p>
+                <p class="cargo">{{ integrante.cargo if integrante.cargo else 'N/A' }}</p>
+                <div class="integrante-actions">
+                    <a href="{{ url_for('credencial_publica', user_id=integrante.id) }}" class="btn btn-small">Ver Credencial</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <p>No hay integrantes registrados</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

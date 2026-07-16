@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - {{ app_name }}{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="dashboard-header">
+        <h1>Bienvenido, {{ user.nombre_completo if user else 'Usuario' }}</h1>
+        <p>Dashboard de {{ app_name }}</p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-content">
+                <h3>Total de Integrantes</h3>
+                <p class="stat-number">{{ total_integrantes }}</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">📦</div>
+            <div class="stat-content">
+                <h3>Equipo Asignado</h3>
+                <p class="stat-number">{{ equipo_usuario|length }}</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">📄</div>
+            <div class="stat-content">
+                <h3>Documentos Disponibles</h3>
+                <p class="stat-number">{{ documentos|length }}</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">🎖️</div>
+            <div class="stat-content">
+                <h3>Tu Rol</h3>
+                <p class="stat-number">{{ user.rol if user else 'N/A' }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-sections">
+        <div class="section">
+            <h2>Tu Información</h2>
+            <div class="info-card">
+                <p><strong>Nombre:</strong> {{ user.nombre_completo if user else 'N/A' }}</p>
+                <p><strong>Correo:</strong> {{ email }}</p>
+                <p><strong>ID TSAR-U:</strong> {{ user.id if user else 'N/A' }}</p>
+                <p><strong>Rol:</strong> {{ user.rol if user else 'N/A' }}</p>
+                <p><strong>Fecha de Ingreso:</strong> {{ user.fecha_ingreso if user else 'N/A' }}</p>
+                <a href="{{ url_for('perfil') }}" class="btn btn-secondary">Editar Perfil</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Acciones Rápidas</h2>
+            <div class="quick-actions">
+                <a href="{{ url_for('credencial') }}" class="action-btn">
+                    <span class="action-icon">🆔</span>
+                    <span>Mi Credencial</span>
+                </a>
+                <a href="{{ url_for('integrantes') }}" class="action-btn">
+                    <span class="action-icon">👥</span>
+                    <span>Ver Integrantes</span>
+                </a>
+                <a href="{{ url_for('inventario') }}" class="action-btn">
+                    <span class="action-icon">📦</span>
+                    <span>Mi Equipamiento</span>
+                </a>
+                <a href="{{ url_for('documentos') }}" class="action-btn">
+                    <span class="action-icon">📚</span>
+                    <span>Documentos</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

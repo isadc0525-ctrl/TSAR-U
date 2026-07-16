@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Inventario - {{ app_name }}{% endblock %}
+
+{% block content %}
+<div class="inventario-container">
+    <h1>Gestión de Inventario</h1>
+
+    <div class="inventario-tabs">
+        <button class="tab-btn active" onclick="switchTab('personal')">Mi Equipamiento</button>
+        <button class="tab-btn" onclick="switchTab('general')">Inventario General</button>
+    </div>
+
+    <!-- Tab: Equipamiento Personal -->
+    <div id="personal" class="tab-content active">
+        <h2>Mi Equipamiento Personal</h2>
+        <div class="equipment-list">
+            <div class="equipment-item">
+                <span class="equipment-name">Casco de rescate</span>
+                <span class="equipment-status">✓ Asignado</span>
+            </div>
+            <div class="equipment-item">
+                <span class="equipment-name">Arnés</span>
+                <span class="equipment-status">✓ Asignado</span>
+            </div>
+            <div class="equipment-item">
+                <span class="equipment-name">Guantes técnicos</span>
+                <span class="equipment-status">✓ Asignado</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab: Inventario General -->
+    <div id="general" class="tab-content">
+        <h2>Inventario General del Grupo</h2>
+        <table class="inventory-table">
+            <thead>
+                <tr>
+                    <th>Equipo</th>
+                    <th>Cantidad</th>
+                    <th>Tipo</th>
+                    <th>Asignado a</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Cuerda de rescate</td>
+                    <td>5</td>
+                    <td>General</td>
+                    <td>Almacén</td>
+                </tr>
+                <tr>
+                    <td>Camilla de rescate</td>
+                    <td>2</td>
+                    <td>General</td>
+                    <td>Almacén</td>
+                </tr>
+                <tr>
+                    <td>Botiquín de emergencia</td>
+                    <td>3</td>
+                    <td>General</td>
+                    <td>Almacén</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+function switchTab(tabName) {
+    const contents = document.querySelectorAll('.tab-content');
+    const buttons = document.querySelectorAll('.tab-btn');
+    
+    contents.forEach(content => content.classList.remove('active'));
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
+    document.getElementById(tabName).classList.add('active');
+    event.target.classList.add('active');
+}
+</script>
+{% endblock %}

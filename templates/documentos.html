@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Documentos - {{ app_name }}{% endblock %}
+
+{% block content %}
+<div class="documentos-container">
+    <h1>Biblioteca Digital</h1>
+    <p>Acceso a reglamentos, manuales y procedimientos</p>
+
+    {% if documentos %}
+    <div class="documents-grid">
+        {% for doc in documentos %}
+        <div class="document-card">
+            <div class="document-icon">📄</div>
+            <h3>{{ doc.titulo }}</h3>
+            <p class="doc-type">{{ doc.tipo }}</p>
+            <a href="{{ doc.url }}" target="_blank" class="btn btn-small">Descargar</a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <p>No hay documentos disponibles</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

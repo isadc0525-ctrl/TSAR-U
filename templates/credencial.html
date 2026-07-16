@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Mi Credencial - {{ app_name }}{% endblock %}
+
+{% block content %}
+<div class="credencial-container">
+    <h1>Mi Credencial Digital</h1>
+
+    <div class="credencial-card">
+        <div class="credencial-header">
+            <h2>{{ app_name }}</h2>
+            <p>Credencial de Rescate Urbano</p>
+        </div>
+
+        <div class="credencial-content">
+            <div class="credencial-avatar">👤</div>
+            
+            <div class="credencial-info">
+                <div class="info-row">
+                    <span class="label">Nombre:</span>
+                    <span class="value">{{ user.nombre_completo if user else 'N/A' }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">ID TSAR-U:</span>
+                    <span class="value">{{ user.id if user else 'N/A' }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Cargo:</span>
+                    <span class="value">{{ user.cargo if user else 'N/A' }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Rol:</span>
+                    <span class="value">{{ user.rol if user else 'N/A' }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Especialidades:</span>
+                    <span class="value">{{ user.especialidades if user else 'N/A' }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="credencial-qr">
+            <p>Código QR para verificación:</p>
+            <div id="qr-code"></div>
+        </div>
+
+        <div class="credencial-footer">
+            <p>Escanea el código QR para verificar esta credencial</p>
+        </div>
+    </div>
+
+    <div class="print-actions">
+        <button onclick="window.print()" class="btn btn-primary">Imprimir Credencial</button>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Volver</a>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+    new QRCode(document.getElementById("qr-code"), "{{ url_for('credencial_publica', user_id=user.id, _external=True) }}");
+</script>
+{% endblock %}

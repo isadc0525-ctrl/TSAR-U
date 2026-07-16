@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Mi Perfil - {{ app_name }}{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <h1>Mi Perfil</h1>
+
+    {% if success %}
+    <div class="alert alert-success">
+        {{ success }}
+    </div>
+    {% endif %}
+
+    <form method="POST" class="profile-form">
+        <div class="form-section">
+            <h2>Información Personal</h2>
+            
+            <div class="form-group">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" id="email" value="{{ user.email if user else '' }}" disabled>
+                <small>No puede ser modificado</small>
+            </div>
+
+            <div class="form-group">
+                <label for="nombre_completo">Nombre Completo</label>
+                <input type="text" id="nombre_completo" name="nombre_completo" value="{{ user.nombre_completo if user else '' }}" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="cargo">Cargo</label>
+                    <input type="text" id="cargo" value="{{ user.cargo if user else '' }}" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="rol">Rol</label>
+                    <input type="text" id="rol" value="{{ user.rol if user else '' }}" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>Profesionalización</h2>
+            
+            <div class="form-group">
+                <label for="especialidades">Especialidades</label>
+                <textarea id="especialidades" name="especialidades" rows="3" placeholder="Ej: Rescate en altura, Buceo, Primeros auxilios">{{ user.especialidades if user else '' }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="certificaciones">Certificaciones</label>
+                <textarea id="certificaciones" name="certificaciones" rows="3" placeholder="Ej: Certificación en rescate técnico, Primeros auxilios avanzados">{{ user.certificaciones if user else '' }}</textarea>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
